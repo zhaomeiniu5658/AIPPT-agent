@@ -305,8 +305,7 @@ import {
   Doption as ADoption
 } from '@arco-design/web-vue'
 import IIcon from '@/utils/slide/icon.js'
-import { generateOutlineOnly, generatePPTFromOutline, convertCozeToPPTData } from '@/api/coze'
-import { generateOutlineStream } from '@/api/coze-stream'
+import { generatePPTFromOutline, convertPptAgentToPPTData, generateOutlineStream } from '@/api/pptagent'
 import OutlineEditor from '@/components/OutlineEditor.vue'
 import TemplateSelector from '@/components/TemplateSelector.vue'
 import { convertMarkdownToPPT } from '@/utils/markdown-to-ppt'
@@ -652,7 +651,7 @@ const handleGenerate = async () => {
   try {
     console.log('[AI Create] 开始生成 PPT 大纲，主题:', pptTopic.value)
     
-    // Stage 1: 调用 Coze 工作流流式生成 PPT 大纲
+    // Stage 1: 调用 PPTAgent 流式生成 PPT 大纲
     
     // 初始化流式数据
     let streamedOutline = ''
@@ -784,7 +783,7 @@ const generatePPTWithOutline = async (outline, title, template = null) => {
     }
     
     // 解析 Markdown 为 PPT 数据结构
-    const pptData = convertCozeToPPTData(pptResult)
+    const pptData = convertPptAgentToPPTData(pptResult)
     
     console.log('[AI Create] PPT 数据结构:', pptData)
     
